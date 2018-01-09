@@ -33,6 +33,11 @@ class Default_Form_addemployeeleaves extends Zend_Form
 	        $department_id->setRequired(true);
 	        $department_id->addValidator('NotEmpty', false, array('messages' => 'Please select department.'));
 
+	        $leave_type = new Zend_Form_Element_Multiselect("leave_type");
+	        $leave_type->setLabel("Leave Type");
+	        $leave_type->setRegisterInArrayValidator(false);
+	        $leave_type->setRequired(true);
+	        $leave_type->addValidator('NotEmpty', false, array('messages' => 'Please select leave type'));
 	        
 	        
 	        $user_id = new Zend_Form_Element_Multiselect("user_id");

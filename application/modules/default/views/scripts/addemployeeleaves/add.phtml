@@ -47,6 +47,11 @@ sapp_Global::generateClientValidations($this->form);?>
 			<div class="division loca_state_div"><?php echo $this->form->department_id; ?></div>			
 			   <span class="errors" id="errors-<?php echo $this->form->department_id->getId(); ?>"><?php echo isset($this->msgarray['department_id'])?$this->msgarray['department_id']:'' ;?></span>			
 			</div>
+			<div class="new-form-ui-multi">
+			  <label class="required"><?php echo $this->form->leave_type->getLabel();?></label>
+			<div class="division loca_state_div"><?php echo $this->form->leave_type; ?></div>			
+			   <span class="errors" id="errors-<?php echo $this->form->leave_type->getId(); ?>"><?php echo isset($this->msgarray['leave_type'])?$this->msgarray['leave_type']:'' ;?></span>			
+			</div>
 			
 			
 			<div class="new-form-ui">
