@@ -1,0 +1,143 @@
+<?php 
+
+?>
+
+<?php if(empty($this->empdata)){?>
+   <div class="ml-alert-1-info m1-info-set">
+				<div class="style-1-icon info"></div>
+				<?php if($this->rowexist == 'norows'){?>
+						No data found.
+				<?php }else{?>
+						Employee inactivated.
+				<?php }?>
+	</div>
+
+<?php 
+}
+else
+{	
+	if(!empty($this->employeedata))
+	 {
+			echo $this->employeedetails($this->employeedata,'view',$this->id); 
+	 } 
+?>
+
+<div class="right-block-data">
+	<div id="error_message" style="display:none;"></div>
+	<?php if(empty($this->data)){?>
+			<div class="ml-alert-1-info m1-info-set">
+				<div class="style-1-icon info"></div>Salary details are not configured yet.
+			</div>
+	<?php }else{?>
+			<?php echo $this->form->id;
+			echo $this->form->user_id;
+			?>
+<?php 
+$account_holding = $this->form->accountholding->getValue();
+sapp_Helper::viewHeader();
+sapp_Helper::viewBody('alt',$this->form->currencyid->getLabel(),(!empty($this->data[0]['currencyid']))?$this->data[0]['currencyid']:"...",$this->form->salarytype->getLabel(),(!empty($this->data[0]['salarytype']))?$this->data[0]['salarytype']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->salary->getLabel(),
+(!empty($this->data[0]['salary']))?$this->data[0]['salary']:"...",$this->form->bankname->getLabel(),
+(!empty($this->data[0]['bankname']))?$this->data[0]['bankname']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->ta->getLabel(),(!empty($this->data[0]['ta']))?$this->data[0]['ta']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->da->getLabel(),(!empty($this->data[0]['da']))?$this->data[0]['da']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->hra->getLabel(),(!empty($this->data[0]['hra']))?$this->data[0]['hra']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->gratuity->getLabel(),(!empty($this->data[0]['gratuity']))?$this->data[0]['gratuity']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->pf->getLabel(),(!empty($this->data[0]['pf']))?$this->data[0]['pf']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->os->getLabel(),(!empty($this->data[0]['os']))?$this->data[0]['os']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->cca->getLabel(),(!empty($this->data[0]['cca']))?$this->data[0]['cca']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->pda->getLabel(),(!empty($this->data[0]['pda']))?$this->data[0]['pda']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->vpa->getLabel(),(!empty($this->data[0]['vpa']))?$this->data[0]['vpa']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->medical->getLabel(),(!empty($this->data[0]['medical']))?$this->data[0]['medical']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->arrear->getLabel(),(!empty($this->data[0]['arrear']))?$this->data[0]['arrear']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->ot->getLabel(),(!empty($this->data[0]['ot']))?$this->data[0]['ot']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->incentive->getLabel(),(!empty($this->data[0]['incentive']))?$this->data[0]['incentive']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->bonus->getLabel(),(!empty($this->data[0]['bonus']))?$this->data[0]['bonus']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->esi->getLabel(),(!empty($this->data[0]['esi']))?$this->data[0]['esi']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->advance->getLabel(),(!empty($this->data[0]['advance']))?$this->data[0]['advance']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->loan->getLabel(),(!empty($this->data[0]['loan']))?$this->data[0]['loan']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->esiemp->getLabel(),(!empty($this->data[0]['esiemp']))?$this->data[0]['esiemp']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->itded->getLabel(),(!empty($this->data[0]['itded']))?$this->data[0]['itded']:"...");
+
+sapp_Helper::viewBody('nor',
+$this->form->medded->getLabel(),(!empty($this->data[0]['medded']))?$this->data[0]['medded']:"...");
+
+sapp_Helper::viewBody('alt',$this->form->accountholder_name->getLabel(),(!empty($this->data[0]['accountholder_name']))?$this->data[0]['accountholder_name']:"...",$this->form->accountholding->getLabel(),(!empty($account_holding))?$this->form->accountholding->getValue():"...");
+
+sapp_Helper::viewBody('nor',$this->form->accountclasstypeid->getLabel(),(!empty($this->data[0]['accountclasstypeid']))?$this->data[0]['accountclasstypeid']:"...",$this->form->bankaccountid->getLabel(),(!empty($this->data[0]['bankaccountid']))?$this->data[0]['bankaccountid']:"...");
+
+sapp_Helper::viewBody('alt',$this->form->accountnumber->getLabel(),(!empty($this->data[0]['accountnumber']))?$this->data[0]['accountnumber']:"...",'','');
+
+sapp_Helper::viewBody('alt',$this->form->pannumber->getLabel(),(!empty($this->data[0]['pannumber']))?$this->data[0]['pannumber']:"...",'','');
+
+sapp_Helper::viewBody('alt',$this->form->pfnumber->getLabel(),(!empty($this->data[0]['pfnumber']))?$this->data[0]['pfnumber']:"...",'','');
+
+sapp_Helper::viewBody('alt',$this->form->uannumber->getLabel(),(!empty($this->data[0]['uannumber']))?$this->data[0]['uannumber']:"...",'','');
+
+sapp_Helper::viewFooter();
+
+?>
+	<?php }?>		
+			
+
+</div>	
+</div>
+
+
+<script type='text/javascript'>
+$(document).ready(function(){
+
+   $("#emp_salary").addClass('active');
+   $("#emp_salary").removeAttr("onclick");
+   <?php /*if($this->form->salarytype->getValue() !=''){ 
+   			if($this->form->salarytype->getValue() == 1){
+   	?>
+   			$('#salarytext').html('Per Annum');
+   	<?php } else {?>
+   			$('#salarytext').html('Per Hour');
+   <?php } }else{?>
+   			$('#salarytext').html('Per Annum');
+   <?php }*/ ?>
+})
+</script>
+<?php } ?>

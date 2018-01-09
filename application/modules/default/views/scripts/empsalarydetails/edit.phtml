@@ -1,0 +1,504 @@
+<?php 
+
+?>
+
+<?php if(empty($this->empdata)){?>
+     <div class="ml-alert-1-info m1-info-set">
+				<div class="style-1-icon info"></div>
+				<?php if($this->rowexist == 'norows'){?>
+				No data found.
+				<?php }else{?>
+				Employee inactivated.
+				<?php }?>
+	</div>
+
+<?php
+}else
+{
+
+   if($this->emptyFlag != 0)
+	{
+?>	 <div class="ml-alert-1-info m1-info-set">
+		<div class="style-1-icon info"></div>
+			Site configuration is not yet set.Please configure them to add employee salary details.	
+	</div>	
+<?php
+	}
+	sapp_Global::generateClientValidations($this->form);
+	if (count($this->messages)) {?>
+		<div id="dispempsalary" class="settingssuccess">
+			<?php 
+				foreach ($this->messages as $message)
+				{
+					$flag = array();				
+					$flag = array_keys($message);
+					echo "<div id='messageData' class='ml-alert-1-$flag[0]'><div style='display:block;'><span class='style-1-icon $flag[0]'></span>";
+					echo $message[$flag[0]];
+					echo "</div></div>";
+				} 
+			?>
+		</div>
+	
+<?php } 
+
+		if(!empty($this->employeedata))
+		 {
+			echo $this->employeedetails($this->employeedata,'edit',$this->id); 
+		 } 
+		 //echo 2;exit;
+?>
+   <div class="right-block-data">
+	<div id="error_message" style="display:none;"></div>
+	<form name="<?php echo $this->form->getName(); ?>" id="<?php echo $this->form->getId(); ?>" action="<?php echo $this->form->getAction();?>" method="<?php echo $this->form->getMethod(); ?>">
+		<?php echo $this->form->id;
+          echo $this->form->user_id; 
+		?>
+			<div class="total-form-controller">
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->currencyid->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->currencyid; ?>
+				<?php if(isset($this->msgarray['currencyid'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->currencyid->getId(); ?>"><?php echo $this->msgarray['currencyid'];?></span>
+				<?php }?>
+				
+				  <?php if(in_array('currency',$this->popConfigPermission)) { ?>	
+					<span class="add-coloum" onclick="displaydeptform('<?php echo BASE_URL.'currency/addpopup' ?>','Currency');"> Add Currency </span>			
+				<?php } ?>
+                </div>
+				
+				</div>
+				
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->salarytype->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->salarytype; ?>
+				<?php if(isset($this->msgarray['salarytype'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->salarytype->getId(); ?>"><?php echo $this->msgarray['salarytype'];?></span>
+				<?php }?>
+				
+					<?php if(in_array('payfrequency',$this->popConfigPermission)) { ?>	
+					<span class="add-coloum" onclick="displaydeptform('<?php echo BASE_URL.'payfrequency/addpopup' ?>','Pay Frequency');"> Add Pay Frequency</span>			
+			   		<?php } ?>
+			   	</div>	
+				</div>
+				
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->salary->getLabel(); ?> <span id='salarytext'></span></label>
+				<div class="division"><?php echo $this->form->salary; ?></div>
+				<?php if(isset($this->msgarray['salary'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->salary->getId(); ?>"><?php echo $this->msgarray['salary'];?></span>
+				<?php }?>
+				</div>
+                
+                <div class="new-form-ui">
+				  <label><?php echo $this->form->ta->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->ta; ?></div>
+				<?php if(isset($this->msgarray['ta'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->ta->getId(); ?>"><?php echo $this->msgarray['ta'];?></span>
+				<?php }?>
+				</div>
+                
+                 <div class="new-form-ui">
+				  <label><?php echo $this->form->da->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->da; ?></div>
+				<?php if(isset($this->msgarray['da'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->da->getId(); ?>"><?php echo $this->msgarray['da'];?></span>
+				<?php }?>
+				</div>
+                
+                 <div class="new-form-ui">
+				  <label><?php echo $this->form->hra->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->hra; ?></div>
+				<?php if(isset($this->msgarray['hra'])){?>
+				  <span class="errors" id="errors-<?php echo $this->form->hra->getId(); ?>"><?php echo $this->msgarray['hra'];?></span>
+				<?php }?>
+				</div>
+                
+                  <div class="new-form-ui">
+				  <label><?php echo $this->form->gratuity->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->gratuity; ?></div>
+				<?php if(isset($this->msgarray['gratuity'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->gratuity->getId(); ?>"><?php echo $this->msgarray['gratuity'];?></span>
+				<?php }?>
+				</div>
+                
+                <div class="new-form-ui">
+				  <label><?php echo $this->form->pf->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->pf; ?></div>
+				<?php if(isset($this->msgarray['pf'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->pf->getId(); ?>"><?php echo $this->msgarray['pf'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->os->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->os; ?></div>
+				<?php if(isset($this->msgarray['os'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->os->getId(); ?>"><?php echo $this->msgarray['os'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->cca->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->cca; ?></div>
+				<?php if(isset($this->msgarray['cca'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->cca->getId(); ?>"><?php echo $this->msgarray['cca'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->pda->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->pda; ?></div>
+				<?php if(isset($this->msgarray['pda'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->pda->getId(); ?>"><?php echo $this->msgarray['pda'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->vpa->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->vpa; ?></div>
+				<?php if(isset($this->msgarray['vpa'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->vpa->getId(); ?>"><?php echo $this->msgarray['vpa'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->medical->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->medical; ?></div>
+				<?php if(isset($this->msgarray['medical'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->medical->getId(); ?>"><?php echo $this->msgarray['medical'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->arrear->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->arrear; ?></div>
+				<?php if(isset($this->msgarray['arrear'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->arrear->getId(); ?>"><?php echo $this->msgarray['arrear'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->ot->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->ot; ?></div>
+				<?php if(isset($this->msgarray['ot'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->ot->getId(); ?>"><?php echo $this->msgarray['ot'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->incentive->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->incentive; ?></div>
+				<?php if(isset($this->msgarray['incentive'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->incentive->getId(); ?>"><?php echo $this->msgarray['incentive'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->bonus->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->bonus; ?></div>
+				<?php if(isset($this->msgarray['bonus'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->bonus->getId(); ?>"><?php echo $this->msgarray['bonus'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->esi->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->esi; ?></div>
+				<?php if(isset($this->msgarray['esi'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->esi->getId(); ?>"><?php echo $this->msgarray['esi'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->advance->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->advance; ?></div>
+				<?php if(isset($this->msgarray['advance'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->advance->getId(); ?>"><?php echo $this->msgarray['advance'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->loan->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->loan; ?></div>
+				<?php if(isset($this->msgarray['loan'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->loan->getId(); ?>"><?php echo $this->msgarray['loan'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->esiemp->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->esiemp; ?></div>
+				<?php if(isset($this->msgarray['esiemp'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->esiemp->getId(); ?>"><?php echo $this->msgarray['esiemp'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->itded->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->itded; ?></div>
+				<?php if(isset($this->msgarray['itded'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->itded->getId(); ?>"><?php echo $this->msgarray['itded'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->medded->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->medded; ?></div>
+				<?php if(isset($this->msgarray['medded'])){?>
+	 <span class="errors" id="errors-<?php echo $this->form->medded->getId(); ?>"><?php echo $this->msgarray['medded'];?></span>
+				<?php }?>
+				</div>
+
+				
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->bankname->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->bankname; ?></div>
+				<?php if(isset($this->msgarray['bankname'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->bankname->getId(); ?>"><?php echo $this->msgarray['bankname'];?></span>
+				<?php }?>
+				</div>
+		
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->accountholder_name->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->accountholder_name; ?></div>
+				<?php if(isset($this->msgarray['accountholder_name'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->accountholder_name->getId(); ?>"><?php echo $this->msgarray['accountholder_name'];?></span>
+				<?php }?>
+				</div>
+				
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->accountholding->getLabel(); ?><img class="tooltip" title="<?php echo DATE_DESCRIPTION;?>" src="<?php echo $this->baseUrl().'/public/media/';?>images/help.png"></label>
+				<div class="division"><?php echo $this->form->accountholding; ?></div>
+				<?php if(isset($this->msgarray['accountholding'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->accountholding->getId(); ?>"><?php echo $this->msgarray['accountholding'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->pay_from->getLabel(); ?><img class="tooltip" title="<?php echo DATE_DESCRIPTION;?>" src="<?php echo $this->baseUrl().'/public/media/';?>images/help.png"></label>
+				<div class="division"><?php echo $this->form->pay_from; ?></div>
+				<?php if(isset($this->msgarray['pay_from'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->pay_from->getId(); ?>"><?php echo $this->msgarray['pay_from'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->pay_to->getLabel(); ?><img class="tooltip" title="<?php echo DATE_DESCRIPTION;?>" src="<?php echo $this->baseUrl().'/public/media/';?>images/help.png"></label>
+				<div class="division"><?php echo $this->form->pay_to; ?></div>
+				<?php if(isset($this->msgarray['pay_to'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->pay_to->getId(); ?>"><?php echo $this->msgarray['pay_to'];?></span>
+				<?php }?>
+				</div>
+				
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->accountclasstypeid->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->accountclasstypeid; ?>
+				<?php if(isset($this->msgarray['accountclasstypeid'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->accountclasstypeid->getId(); ?>"><?php echo $this->msgarray['accountclasstypeid'];?></span>
+				<?php }?>
+				
+			   <?php if(in_array('accountclasstype',$this->popConfigPermission)) { ?>	
+					<span class="add-coloum" onclick="displaydeptform('<?php echo BASE_URL.'accountclasstype/addpopup' ?>','Account Class Type');"> Add Account Class Type </span>			
+				<?php } ?>
+                </div>
+				
+				</div>
+												
+				<div class="new-form-ui">
+				  <label><?php echo $this->form->bankaccountid->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->bankaccountid; ?>
+				
+				<?php if(isset($this->msgarray['bankaccountid'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->bankaccountid->getId(); ?>"><?php echo $this->msgarray['bankaccountid'];?></span>
+				<?php }?>
+
+				  <?php if(in_array('bankaccounttype',$this->popConfigPermission)) { ?>	
+					<span class="add-coloum" onclick="displaydeptform('<?php echo BASE_URL.'bankaccounttype/addpopup' ?>','Account Type');"> Add Account Type</span>			
+				<?php } ?>
+	
+                </div>
+				</div>	
+				
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->accountnumber->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->accountnumber; ?></div>
+				<?php if(isset($this->msgarray['accountnumber'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->accountnumber->getId(); ?>"><?php echo $this->msgarray['accountnumber'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->pannumber->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->pannumber; ?></div>
+				<?php if(isset($this->msgarray['pannumber'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->pannumber->getId(); ?>"><?php echo $this->msgarray['pannumber'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->pfnumber->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->pfnumber; ?></div>
+				<?php if(isset($this->msgarray['pfnumber'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->pfnumber->getId(); ?>"><?php echo $this->msgarray['pfnumber'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->aadharno->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->aadharno; ?></div>
+				<?php if(isset($this->msgarray['aadharno'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->aadharno->getId(); ?>"><?php echo $this->msgarray['aadharno'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->esino->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->esino; ?></div>
+				<?php if(isset($this->msgarray['esino'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->esino->getId(); ?>"><?php echo $this->msgarray['esino'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->uannumber->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->uannumber; ?></div>
+				<?php if(isset($this->msgarray['uannumber'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->uannumber->getId(); ?>"><?php echo $this->msgarray['uannumber'];?></span>
+				<?php }?>
+				</div>
+				
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->dim->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->dim; ?></div>
+				<?php if(isset($this->msgarray['dim'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->dim->getId(); ?>"><?php echo $this->msgarray['dim'];?></span>
+				<?php }?>
+				</div>
+
+				<div class="new-form-ui">
+			   <label><?php echo $this->form->lwp->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->lwp; ?></div>
+				<?php if(isset($this->msgarray['lwp'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->lwp->getId(); ?>"><?php echo $this->msgarray['lwp'];?></span>
+				<?php }?>
+				</div>
+							
+				<div class="new-form-ui-submit" style="margin: 15px 0;">
+					<?php echo $this->form->submit; ?>
+			    </div>  
+			</div>
+			
+	</form>
+</div>
+</div>
+
+<div id="currencyContainer"  style="display: none; overflow: auto;">
+	<div class="heading">
+		<a href="javascript:void(0)">
+	    <img src="<?php echo $this->baseUrl().'/public/media/';?>images/close.png" name="" align="right" border="0" hspace="3" vspace="5" class="closeAttachPopup" style="margin: -24px 8px 0 0;"> </a>
+	</div>
+
+	<iframe id="currencyCont" class="business_units_iframe" frameborder="0"></iframe>
+</div>
+
+<div id="accountclasstypeContainer"  style="display: none; overflow: auto;">
+	<div class="heading">
+		<a href="javascript:void(0)">
+	    <img src="<?php echo $this->baseUrl().'/public/media/';?>images/close.png" name="" align="right" border="0" hspace="3" vspace="5" class="closeAttachPopup" style="margin: -24px 8px 0 0;"> </a>
+	</div>
+
+	<iframe id="accountclasstypeCont" class="business_units_iframe" frameborder="0"></iframe>
+</div>
+
+<div id="bankaccounttypeContainer"  style="display: none; overflow: auto;">
+	<div class="heading">
+		<a href="javascript:void(0)">
+	    <img src="<?php echo $this->baseUrl().'/public/media/';?>images/close.png" name="" align="right" border="0" hspace="3" vspace="5" class="closeAttachPopup" style="margin: -24px 8px 0 0;"> </a>
+	</div>
+
+	<iframe id="bankaccounttypeCont" class="business_units_iframe" frameborder="0"></iframe>
+</div>
+
+<div id="payfrequencyContainer"  style="display: none; overflow: auto;">
+	<div class="heading">
+		<a href="javascript:void(0)">
+	    <img src="<?php echo $this->baseUrl().'/public/media/';?>images/close.png" name="" align="right" border="0" hspace="3" vspace="5" class="closeAttachPopup" style="margin: -24px 8px 0 0;"> </a>
+	</div>
+
+	<iframe id="payfrequencyCont" class="business_units_iframe" frameborder="0"></iframe>
+</div>
+   
+<script type='text/javascript'>
+$(document).ready(function(){
+     <?php if (count($this->messages)) {?>
+      setTimeout(function(){
+			$('#dispempsalary').fadeOut('slow');
+		},3000);
+
+<?php } ?>
+     //var yearrange = <?php echo "'".date("Y", strtotime("-50 years")).':'.date('Y')."'"; ?>;
+      var yearrange = <?php echo "'".YEAR.':'.date('Y')."'"; ?>;
+            $('#accountholding').datepicker({
+				showOn:'both',
+				maxDate: new Date, 
+				yearRange: yearrange,
+				dateFormat:"<?php echo DATEFORMAT_JS;?>",
+				buttonImage: "<?php echo $this->baseUrl("public/media/images/cal.jpg");?>",
+				buttonImageOnly: true,
+				buttonText: "",
+				changeMonth: true,
+				changeYear: true,
+                                showButtonPanel: true ,
+                onClose:function(){
+                                    $('#accountholding').trigger('blur');
+								  }				
+			});
+			
+			$('#pay_from').datepicker({
+				showOn:'both',
+				maxDate: new Date, 
+				yearRange: yearrange,
+				dateFormat:"<?php echo DATEFORMAT_JS;?>",
+				buttonImage: "<?php echo $this->baseUrl("public/media/images/cal.jpg");?>",
+				buttonImageOnly: true,
+				buttonText: "",
+				changeMonth: true,
+				changeYear: true,
+                                showButtonPanel: true ,
+                onClose:function(){
+                                    $('#pay_from').trigger('blur');
+								  }				
+			});
+
+			$('#pay_to').datepicker({
+				showOn:'both',
+				maxDate: new Date, 
+				yearRange: yearrange,
+				dateFormat:"<?php echo DATEFORMAT_JS;?>",
+				buttonImage: "<?php echo $this->baseUrl("public/media/images/cal.jpg");?>",
+				buttonImageOnly: true,
+				buttonText: "",
+				changeMonth: true,
+				changeYear: true,
+                                showButtonPanel: true ,
+                onClose:function(){
+                                    $('#pay_to').trigger('blur');
+								  }				
+			});
+    $("#emp_salary").addClass('active');
+    $("#emp_salary").removeAttr("onclick");
+
+    <?php /*if($this->form->salarytype->getValue() !=''){ 
+			if($this->form->salarytype->getValue() == 1){
+	?>
+			$('#salarytext').html('Per Annum');
+	<?php } else {?>
+			$('#salarytext').html('Per Hour');
+	<?php } }else{?>
+			$('#salarytext').html('Per Annum');
+	<?php }*/ ?>
+
+
+});
+</script>
+<?php } ?>
