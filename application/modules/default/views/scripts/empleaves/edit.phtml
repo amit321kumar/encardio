@@ -61,6 +61,13 @@ sapp_Global::generateClientValidations($this->form);
 				</div>
 				
 				<div class="new-form-ui inputheight">
+				  <label class="required"><?php echo $this->form->leave_type->getLabel(); ?></label>
+				<div class="division"><?php echo $this->form->leave_type; ?></div>
+				<?php if(isset($this->msgarray['leave_type'])){?>
+				   <span class="errors" id="errors-<?php echo $this->form->leave_type->getId(); ?>"><?php echo $this->msgarray['leave_type'];?></span>
+				<?php }?>
+				</div>
+				<div class="new-form-ui inputheight">
 				  <label class="required">Year</label>
 				<div class="division"><?php echo $this->form->alloted_year; ?></div>
 				<?php if(isset($this->msgarray['alloted_year'])){?>

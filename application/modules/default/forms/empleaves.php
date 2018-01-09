@@ -38,6 +38,12 @@ class Default_Form_empleaves extends Zend_Form
         $alloted_year->setAttrib('maxLength', 4);
 		$alloted_year->setAttrib('readonly', 'true');
 		$alloted_year->setAttrib('onfocus', 'this.blur()');
+
+		$leave_type = new Zend_Form_Element_Multiselect("leave_type");
+	        $leave_type->setLabel("Leave Type");
+	        $leave_type->setRegisterInArrayValidator(false);
+	        $leave_type->setRequired(true);
+	        $leave_type->addValidator('NotEmpty', false, array('messages' => 'Please select Leave Type.'));
 				
 		$submit = new Zend_Form_Element_Submit('submit');
 		$submit->setAttrib('id', 'submitbutton');
@@ -48,7 +54,7 @@ class Default_Form_empleaves extends Zend_Form
 		 $submitbutton->setAttrib('id', 'submitbuttons');
 		$submitbutton->setLabel('Save');
 		
-		$this->addElements(array($id,$userid,$emp_leave_limit,$used_leaves,$alloted_year,$submit,$submitbutton));
+		$this->addElements(array($id,$userid,$emp_leave_limit,$used_leaves,$leave_type,$alloted_year,$submit,$submitbutton));
         $this->setElementDecorators(array('ViewHelper'));
      		
 	}
